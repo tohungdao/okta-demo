@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+//use App\Http\Controllers\ContactController;
+
+use App\Http\Controllers\Auth\LoginController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('login/okta', 'Auth\LoginController@redirectToProvider')->name('login-okta');
+Route::get('login/okta/callback', 'Auth\LoginController@handleProviderCallback');
